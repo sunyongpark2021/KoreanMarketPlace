@@ -1,57 +1,67 @@
-
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, Image, TouchableWithoutFeedback, TouchableOpacity,
-TouchableHighlight, Alert, Dimensions, Button} from 'react-native';
-import {useState} from 'react'
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
+import { useState } from "react";
+import berryLogo from "./assets/berry.png";
+import { Padding } from "@mui/icons-material";
 
 export default function App() {
-
-  [color, setColor] = useState('yellow')
-
-  const changeColor = (backgroundColor) => {
-    if (backgroundColor === 'yellow') {
-      setColor('dodgerblue')
-    } else {
-      setColor('yellow')
-    }
-  }
-  // const showlogo = () => {
-  //   <View style={styles.container}>
-  //     return (
-
-  //     )
-  //   </View>>
-  // }
   return (
-    <SafeAreaView style={styles(color).container}>
-      <Text>HIHIHHI</Text>
-      <Button 
-        onPress={() => changeColor(color)}
-        title={'Click Me'}
-        style={{
-        backgroundColor: 'dodgerblue',
-        width: '50%',
-        height: 70
-      }} />
+    <>
+      <StatusBar style="white" />
+      <View style={styles.appContainer}>
+        <Image style={styles.image} source={require("./assets/berry1.png")} />
+        <Image
+          style={styles.screenbars}
+          source={require("./assets/screenbars.png")}
+        />
+        <View
+          style={{ position: "absolute", top: 400, right: 70, padding: 10 }}
+        >
+          <Text style={{ color: "#B1B9FC", fontSize: 25, marginBottom: 8 }}>
+            {"         "}
+            SIGN IN{" "}
+          </Text>
 
-      <Button 
-        onPress={() => showlogo()}
-        title={'Show Berry Logo'}
-        style={{
-        backgroundColor: 'green',
-        width: '50%',
-        height: 50
-      }} />
-
-    </SafeAreaView>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+            Email or Phone Number
+          </Text>
+          <TextInput style={styles.textInput} placeholder="ID" />
+          <TextInput style={styles.textInput} placeholder="PASSWORD" />
+          <View style={{ marginTop: 20, marginBottom: 10 }}>
+            <Button title="LOGIN" color="#b1b9fc" />
+          </View>
+        </View>
+      </View>
+    </>
   );
 }
 
-const styles = (color) => StyleSheet.create({
-  container: {
+const styles = StyleSheet.create({
+  appContainer: {
     flex: 1,
-    backgroundColor: color,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    // backgroundColor: "#e4d0ff",
+  },
+  image: {
+    width: 139.88,
+    height: 144.66,
+    margin: 20,
+  },
+  screenbars: {
+    width: 310,
+    height: 460,
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: "",
+    backgroundColor: "white",
+    color: "",
+    borderRadius: 6,
+    width: "100%",
+    padding: 5,
+    marginTop: 10,
+    marginBottom: 15,
   },
 });

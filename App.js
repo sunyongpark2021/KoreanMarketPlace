@@ -1,10 +1,26 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
 import { useState } from "react";
-import berryLogo from "./assets/berry.png";
-import { Padding } from "@mui/icons-material";
+import LoggedIn from "./screens/LoggedIn";
 
 export default function App() {
+  [logIn, setLogIn] = useState(false);
+  [idEnteredText, setIdEnteredText] = useState();
+  [pwEnteredText, setPwEnteredText] = useState();
+
+  function goToLoggedInScreen() {
+    setLogIn(true);
+  }
+  function idEntered(enteredText) {
+    setIdEnteredText(enteredText);
+  }
+  function pwEntered(enteredText) {
+    setPwEnteredText(enteredText);
+  }
+
+  if (logIn) {
+    return <LoggedIn id={idEnteredText} pw={pwEnteredText} />;
+  }
   return (
     <>
       <StatusBar style="white" />
@@ -25,10 +41,22 @@ export default function App() {
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>
             Email or Phone Number
           </Text>
-          <TextInput style={styles.textInput} placeholder="ID" />
-          <TextInput style={styles.textInput} placeholder="PASSWORD" />
+          <TextInput
+            onChangeText={idEntered}
+            style={styles.textInput}
+            placeholder="ID"
+          />
+          <TextInput
+            onChangeText={pwEntered}
+            style={styles.textInput}
+            placeholder="PASSWORD"
+          />
           <View style={{ marginTop: 20, marginBottom: 10 }}>
-            <Button title="LOGIN" color="#b1b9fc" />
+            <Button
+              onPress={goToLoggedInScreen}
+              title="LOGIN"
+              color="#b1b9fc"
+            />
           </View>
         </View>
       </View>
@@ -55,9 +83,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "",
-    backgroundColor: "white",
-    color: "",
+    backgroundColor: "#ffffff",
     borderRadius: 6,
     width: "100%",
     padding: 5,

@@ -4,7 +4,7 @@ import { useState } from "react";
 import LoggedIn from "./screens/LoggedIn";
 
 export default function App() {
-  [logIn, setLogIn] = useState(false);
+  [logIn, stLogIn] = useState(false);
   [idEnteredText, setIdEnteredText] = useState();
   [pwEnteredText, setPwEnteredText] = useState();
 

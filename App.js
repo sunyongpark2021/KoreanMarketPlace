@@ -1,12 +1,31 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Button,
+  TextInput,
+  ImageBackground,
+} from "react-native";
 import { useState } from "react";
+
 import LoggedIn from "./screens/LoggedIn";
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
 
 export default function App() {
-  [logIn, stLogIn] = useState(false);
+  [logIn, setLogIn] = useState(false);
   [idEnteredText, setIdEnteredText] = useState();
   [pwEnteredText, setPwEnteredText] = useState();
+
+  const [fontsLoaded] = useFonts({
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
 
   function goToLoggedInScreen() {
     setLogIn(true);
@@ -25,7 +44,10 @@ export default function App() {
     <>
       <StatusBar style="white" />
       <View style={styles.appContainer}>
-        <Image style={styles.image} source={require("./assets/berry1.png")} />
+        <Image
+          style={styles.image}
+          source={require("./assets/images/berry1.png")}
+        />
         <Image
           style={styles.screenbars}
           source={require("./assets/screenbars.png")}
@@ -65,6 +87,12 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  rootScreen: {
+    flex: 1,
+  },
+  backgroundImage: {
+    opacity: 0.15,
+  },
   appContainer: {
     flex: 1,
     flexDirection: "column",

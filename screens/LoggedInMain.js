@@ -6,64 +6,101 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
+  ImageBackground,
 } from "react-native";
+import { useState } from "react";
+import MapView from "react-native-maps";
 
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import ChargeBerry from "./ChargeBerry";
 import Font1 from "../components/ui/Font1.js";
 import Card from "../components/ui/Card.js";
+import MapFrame from "../components/ui/MapFrame.js";
 
-function LoggedInMain({ id, pw }) {
-  return (
-    <View style={styles.rootContainer}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => setLogIn(false)}>
-          <Image
-            style={styles.image}
-            source={require("../assets/images/berry1.png")}
-          />
-        </TouchableOpacity>
+function LoggedInMain({ user, pw, ReturnToMainPage }) {
+  const [chargeBerryPage, setChargeBerryPage] = useState(false);
 
-        <TextInput
-          style={styles.textInput}
-          placeholder="🔍 Search for anything "
-        />
-        <View
-          style={[
-            {
-              width: "20%",
-              height: "68%",
-              marginTop: 5,
-              marginHorizontal: 2,
-              borderRadius: 7,
-              borderWidth: 2,
-              backgroundColor: "#3cb371",
-            },
-          ]}
-        >
-          <Button title="Search" color="#3cb371" />
-        </View>
-      </View>
-      <View style={styles.flextorow}>
-        <Font1 style={styles.bolded}>Welcome Back User: {id}</Font1>
-      </View>
-      <Card>
-        <Text>
-          New users Promotion: Buy your Berry by 12/31 and get{" "}
-          <Text style={styles.boldText}>50%</Text> OFF on your next purchase.{" "}
-          {"\n"}
-          Charge your Berry now ➡️{"    "}
-          <TouchableOpacity>
-            <Image //how to move the logo downer?
-              style={styles.imageclick}
-              source={require("../assets/images/berry1.png")}
-              onPress // upon onpress, direct user to charging Berry page
+  return chargeBerryPage ? (
+    <ChargeBerry
+      goBackToMain={setChargeBerryPage}
+      toMainPage={ReturnToMainPage}
+    />
+  ) : (
+    <>
+      <ImageBackground
+        source={require("../assets/images/backgroundImage.png")}
+        resizeMode="cover"
+        style={styles.rootScreen}
+        imageStyle={styles.backgroundImage}
+      >
+        <SafeAreaView style={styles.flex1}>
+          <View style={styles.rootContainer}>
+            <View style={styles.header}>
+              <TouchableOpacity onPress={() => ReturnToMainPage()}>
+                <Image
+                  style={styles.image}
+                  source={require("../assets/images/berry1.png")}
+                />
+              </TouchableOpacity>
+
+              <TextInput
+                style={styles.textInput}
+                placeholder="🔍 Search for anything "
+              />
+              <View
+                style={[
+                  {
+                    width: "auto",
+                    height: "68%",
+                    marginTop: 5,
+                    marginHorizontal: 2,
+                    borderRadius: 7,
+                    borderWidth: 2,
+                    backgroundColor: "#3cb371",
+                  },
+                ]}
+              >
+                <Button title="Search" color="#3cb371" />
+              </View>
+            </View>
+            <View style={styles.flextorow}>
+              <Font1 style={styles.bolded}>Welcome Back User: {user}</Font1>
+            </View>
+            <Card>
+              <Text>
+                New users Promotion: Buy your Berry by 12/31 and get{" "}
+                <Text style={styles.boldText}>50%</Text> OFF on your next
+                purchase. {"\n"}
+                Charge your Berry now ➡️{"    "}
+                <TouchableOpacity onPress={() => setChargeBerryPage(true)}>
+                  <Image
+                    style={styles.imageclick}
+                    source={require("../assets/images/berry1.png")}
+                  />
+                </TouchableOpacity>
+              </Text>
+            </Card>
+          </View>
+          <MapFrame>
+            <MapView
+              style={{ flex: 1 }}
+              initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
             />
-          </TouchableOpacity>
-        </Text>
-      </Card>
-    </View>
+          </MapFrame>
+        </SafeAreaView>
+      </ImageBackground>
+    </>
   );
 }
-
 export default LoggedInMain;
 
 const styles = StyleSheet.create({
@@ -108,5 +145,14 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: "bold",
     fontSize: 17,
+  },
+  flex1: {
+    flex: 1,
+  },
+  rootScreen: {
+    flex: 1,
+  },
+  backgroundImage: {
+    opacity: 0.55,
   },
 });

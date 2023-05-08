@@ -11,15 +11,66 @@ import {
   ImageBackground,
 } from "react-native";
 import { useState } from "react";
-import MapView from "react-native-maps";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { Ionicons } from "@expo/vector-icons";
 import ChargeBerry from "./ChargeBerry";
-import Font1 from "../components/ui/Font1.js";
-import Card from "../components/ui/Card.js";
-import MapFrame from "../components/ui/MapFrame.js";
+
+import Market from "./Market";
+import Account from "./Account";
+import Main from "./Main";
+
+const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+function DrawNavigator() {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "#cccccc" },
+        headerTintColor: "white",
+        drawerContentStyle: { backgroundColor: "yellow" },
+        drawerInactiveTintColor: "black",
+        drawerActiveTintColor: "#351401",
+        drawerActiveBackgroundColor: "#e4baa1",
+      }}
+    >
+      <Drawer.Screen
+        name="Categories"
+        component={Main}
+        options={{
+          title: "Main Page",
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="To Market"
+        component={Market}
+        options={{
+          drawerIcon: ({ color, size }) => <Ionicons name="barcode" />,
+        }}
+      />
+      <Drawer.Screen
+        name="Account"
+        component={Account}
+        options={{
+          drawerIcon: ({ color, size }) => <Ionicons name="bulb" />,
+        }}
+      />
+      <Drawer.Screen
+        name="Charge Berry"
+        component={ChargeBerry}
+        options={{
+          drawerIcon: ({ color, size }) => <Ionicons name="ios-open" />,
+        }}
+      />
+    </Drawer.Navigator>
+  );
+}
 
 function LoggedInMain({ user, pw, ReturnToMainPage }) {
   const [chargeBerryPage, setChargeBerryPage] = useState(false);
@@ -30,75 +81,19 @@ function LoggedInMain({ user, pw, ReturnToMainPage }) {
       toMainPage={ReturnToMainPage}
     />
   ) : (
-    <>
-      <ImageBackground
-        source={require("../assets/images/backgroundImage.png")}
-        resizeMode="cover"
-        style={styles.rootScreen}
-        imageStyle={styles.backgroundImage}
-      >
-        <SafeAreaView style={styles.flex1}>
-          <View style={styles.rootContainer}>
-            <View style={styles.header}>
-              <TouchableOpacity onPress={() => ReturnToMainPage()}>
-                <Image
-                  style={styles.image}
-                  source={require("../assets/images/berry1.png")}
-                />
-              </TouchableOpacity>
-
-              <TextInput
-                style={styles.textInput}
-                placeholder="🔍 Search for anything "
-              />
-              <View
-                style={[
-                  {
-                    width: "auto",
-                    height: "68%",
-                    marginTop: 5,
-                    marginHorizontal: 2,
-                    borderRadius: 7,
-                    borderWidth: 2,
-                    backgroundColor: "#3cb371",
-                  },
-                ]}
-              >
-                <Button title="Search" color="#3cb371" />
-              </View>
-            </View>
-            <View style={styles.flextorow}>
-              <Font1 style={styles.bolded}>Welcome Back User: {user}</Font1>
-            </View>
-            <Card>
-              <Text>
-                New users Promotion: Buy your Berry by 12/31 and get{" "}
-                <Text style={styles.boldText}>50%</Text> OFF on your next
-                purchase. {"\n"}
-                Charge your Berry now ➡️{"    "}
-                <TouchableOpacity onPress={() => setChargeBerryPage(true)}>
-                  <Image
-                    style={styles.imageclick}
-                    source={require("../assets/images/berry1.png")}
-                  />
-                </TouchableOpacity>
-              </Text>
-            </Card>
-          </View>
-          <MapFrame>
-            <MapView
-              style={{ flex: 1 }}
-              initialRegion={{
-                latitude: 37.78825,
-                longitude: -122.4324,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-              }}
-            />
-          </MapFrame>
-        </SafeAreaView>
-      </ImageBackground>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Drawer"
+          component={DrawNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="Main" component={Main} />
+        <Stack.Screen name="Account" component={Account} />
+        <Stack.Screen name="Market" component={Market} />
+        <Stack.Screen name="ChargeBerry" component={ChargeBerry} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 export default LoggedInMain;
@@ -128,6 +123,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     alignItems: "flex-start",
+    color: "#cccccc",
   },
   textInput: {
     borderWidth: 2,

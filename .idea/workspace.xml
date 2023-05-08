@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a736761c-8f3e-4d59-b66b-3a69966f1ec8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/LoggedIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/LoggedIn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ChargeBerry.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ChargeBerry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/LoggedIn.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/LoggedInMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/LoggedInMain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/beforeTest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/tetest" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

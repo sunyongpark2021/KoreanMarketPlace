@@ -10,7 +10,7 @@ import {
 
 import HeaderCard from "../components/ui/HeaderCard.js";
 
-function ChargeBerry({ goBackToMain, toMainPage }) {
+function ChargeBerry({ goBackToMain, toMainPage, navigation }) {
   const handlePress = () => {
     goBackToMain(false);
   };
@@ -23,16 +23,11 @@ function ChargeBerry({ goBackToMain, toMainPage }) {
       imageStyle={styles.backgroundImage}
     >
       <View style={styles.header}>
-        <Button
-          onPress={handlePress}
-          title="🔙"
-          color="#b1b9fc"
-          titleStyle={styles.goBackButton}
-        />
         <HeaderCard>
           <Text>Hello</Text>
         </HeaderCard>
-        <TouchableOpacity onPress={() => toMainPage()}>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Market")}>
           <Image
             style={styles.image}
             source={require("../assets/images/berry1.png")}

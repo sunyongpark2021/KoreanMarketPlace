@@ -1,60 +1,49 @@
 import { Text, View, SafeAreaView, StyleSheet, Button } from "react-native";
 import Card from "../components/ui/Card.js";
 import shoppingList from "../assets/data/shoppingList.js";
-
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteFromCart } from "../redux/CartEdit.js";
+import { loadShoppingList } from "../redux/MarketReducer.js";
+import { useEffect } from "react";
 
 function Market() {
+  useEffect(() => {
+    initializeShoppingList(shoppingList);
+  }, []); //[] makes it render only once in the beginning
+  const shoppingItems = useSelector((state) => state.shoppingList.shoppingList);
+
+  function initializeShoppingList(itemList) {
+    dispatch(loadShoppingList({ list: itemList }));
+  }
   function handleAddToCart(itemList) {
-    dispatch(addToCart({ id: itemList }));
+    dispatch(addToCart({ id: itemList })); //id = shoppingList[0]
   }
   function handleDeleteFromCart(itemList) {
     dispatch(deleteFromCart({ id: itemList }));
   }
   const dispatch = useDispatch();
+  console.log(shoppingItems);
   return (
     <SafeAreaView>
       <View>
-        <View style={styles.header}>
-          <Card>
-            <Text>{shoppingList[0]}</Text>
-          </Card>
-          <Button
-            title="Add to Cart"
-            onPress={() => handleAddToCart(shoppingList[0])} //putting () will invoke the function immediately. so () => is placed.
-          />
-          <Button
-            title="Delete from Cart"
-            onPress={() => handleDeleteFromCart(shoppingList[0])}
-          />
-        </View>
-        <View style={styles.header}>
-          <Card>
-            <Text>{shoppingList[1]}</Text>
-          </Card>
-          <Button
-            title="Add to Cart"
-            onPress={() => handleAddToCart(shoppingList[1])} //putting () will invoke the function immediately. so () => is placed.
-          />
-          <Button
-            title="Delete from Cart"
-            onPress={() => handleDeleteFromCart(shoppingList[1])}
-          />
-        </View>
-        <View style={styles.header}>
-          <Card>
-            <Text>{shoppingList[2]}</Text>
-          </Card>
-          <Button
-            title="Add to Cart"
-            onPress={() => handleAddToCart(shoppingList[2])} //putting () will invoke the function immediately. so () => is placed.
-          />
-          <Button
-            title="Delete from Cart"
-            onPress={() => handleDeleteFromCart(shoppingList[2])}
-          />
-        </View>
+        {shoppingItems.length &&
+          shoppingItems.map((item) => {
+            return (
+              <View style={styles.header}>
+                <Card>
+                  <Text>{item}</Text>
+                </Card>
+                <Button
+                  title="Add to Cart"
+                  onPress={() => handleAddToCart(item)} //putting () will invoke the function immediately. so () => is placed.
+                />
+                <Button
+                  title="Delete from Cart"
+                  onPress={() => handleDeleteFromCart(item)}
+                />
+              </View>
+            );
+          })}
       </View>
     </SafeAreaView>
   );

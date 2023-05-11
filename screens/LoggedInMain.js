@@ -19,8 +19,10 @@ import { Ionicons } from "@expo/vector-icons";
 import ChargeBerry from "./ChargeBerry";
 
 import Market from "./Market";
-import Account from "./Account";
+import CartView from "./CartView";
 import Main from "./Main";
+import { Provider } from "react-redux";
+import { store } from "../redux/store.js";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -55,8 +57,8 @@ function DrawNavigator() {
         }}
       />
       <Drawer.Screen
-        name="Account"
-        component={Account}
+        name="View Cart"
+        component={CartView}
         options={{
           drawerIcon: ({ color, size }) => <Ionicons name="bulb" />,
         }}
@@ -74,26 +76,30 @@ function DrawNavigator() {
 
 function LoggedInMain({ user, pw, ReturnToMainPage }) {
   const [chargeBerryPage, setChargeBerryPage] = useState(false);
-
+  function handleGoBackToMain() {
+    setChargeBerryPage(false);
+  }
   return chargeBerryPage ? (
     <ChargeBerry
-      goBackToMain={setChargeBerryPage}
+      goBackToMain={handleGoBackToMain}
       toMainPage={ReturnToMainPage}
     />
   ) : (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Drawer"
-          component={DrawNavigator}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Main" component={Main} />
-        <Stack.Screen name="Account" component={Account} />
-        <Stack.Screen name="Market" component={Market} />
-        <Stack.Screen name="ChargeBerry" component={ChargeBerry} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Drawer"
+            component={DrawNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="Main" component={Main} />
+          <Stack.Screen name="CartView" component={CartView} />
+          <Stack.Screen name="Market" component={Market} />
+          <Stack.Screen name="ChargeBerry" component={ChargeBerry} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 export default LoggedInMain;

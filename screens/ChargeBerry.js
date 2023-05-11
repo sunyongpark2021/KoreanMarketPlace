@@ -23,6 +23,7 @@ function ChargeBerry({ goBackToMain, toMainPage, navigation }) {
       imageStyle={styles.backgroundImage}
     >
       <View style={styles.header}>
+        <Button title="gobacktomain" onPress={goBackToMain} />
         <HeaderCard>
           <Text>Hello</Text>
         </HeaderCard>

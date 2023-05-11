@@ -1,0 +1,4 @@
+express, authenticate (ID, PW) shift cntl + shfit + F > search in all screens
+cntl D > change all words screens declared within the same Stack.navigator can
+go each others screens freely as long as navigation is passed as prop to their
+function

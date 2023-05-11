@@ -6,6 +6,6 @@ import shoppingListReducer from "./MarketReducer.js";
 export const store = configureStore({
   reducer: {
     cartList: cartReducer,
-    shoppingList: shoppingListReducer,
+    shopList: shoppingListReducer,
   },
 });

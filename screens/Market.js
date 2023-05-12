@@ -10,7 +10,7 @@ function Market() {
   useEffect(() => {
     initializeShoppingList(shoppingList);
   }, []); //[] makes it render only once in the beginning
-  const shoppingItems = useSelector((state) => state.shoppingList.shoppingList);
+  const shoppingItems = useSelector((state) => state.shopList.inMarket);
 
   function initializeShoppingList(itemList) {
     dispatch(loadShoppingList({ list: itemList }));
@@ -26,24 +26,25 @@ function Market() {
   return (
     <SafeAreaView>
       <View>
-        {shoppingItems.length &&
-          shoppingItems.map((item) => {
-            return (
-              <View style={styles.header}>
-                <Card>
-                  <Text>{item}</Text>
-                </Card>
-                <Button
-                  title="Add to Cart"
-                  onPress={() => handleAddToCart(item)} //putting () will invoke the function immediately. so () => is placed.
-                />
-                <Button
-                  title="Delete from Cart"
-                  onPress={() => handleDeleteFromCart(item)}
-                />
-              </View>
-            );
-          })}
+        {shoppingItems.length
+          ? shoppingItems.map((item, index) => {
+              return (
+                <View style={styles.header} key={index}>
+                  <Card>
+                    <Text>{item}</Text>
+                  </Card>
+                  <Button
+                    title="Add to Cart"
+                    onPress={() => handleAddToCart(item)} //putting () will invoke the function immediately. so () => is placed.
+                  />
+                  <Button
+                    title="Delete from Cart"
+                    onPress={() => handleDeleteFromCart(item)}
+                  />
+                </View>
+              );
+            })
+          : null}
       </View>
     </SafeAreaView>
   );

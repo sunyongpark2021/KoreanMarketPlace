@@ -4,6 +4,7 @@ const shoppingListSlice = createSlice({
   name: "shoppingList",
   initialState: {
     shoppingList: [],
+    inMarket: [],
   },
   reducers: {
     loadShoppingList: (state, action) => {

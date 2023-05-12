@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a736761c-8f3e-4d59-b66b-3a69966f1ec8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/shoppingList.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/shoppingList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/Market.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Market.js" afterDir="false" />
-    </list>
+    <list default="true" id="a736761c-8f3e-4d59-b66b-3a69966f1ec8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

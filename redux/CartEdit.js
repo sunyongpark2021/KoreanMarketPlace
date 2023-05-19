@@ -11,7 +11,15 @@ const cartSlice = createSlice({
       state.inCart.push(action.payload.id); //id needs to be defined and given as prop from dispatch function.
     },
     deleteFromCart: (state, action) => {
-      state.inCart.splice(state.inCart.indexOf(action.payload.id), 1);
+      // deleteFromCart: (state, action) => {
+      //   state.inCart.splice(state.inCart.indexOf(action.payload.id), 1);
+      // }
+      const index = state.inCart.findIndex(
+        (item) => item.id === action.payload.id
+      ); //findindex returns -1 if element being search is not found in the array.
+      if (index !== -1) {
+        state.inCart.splice(index, 1);
+      }
     },
   },
 });

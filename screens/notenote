@@ -2,3 +2,7 @@ express, authenticate (ID, PW) shift cntl + shfit + F > search in all screens
 cntl D > change all words screens declared within the same Stack.navigator can
 go each others screens freely as long as navigation is passed as prop to their
 function
+
+//Map, State(data). Import the whole State bag instead of importing each individiauls from another component. 
+//create marketSlice
+// when exporting, if put export default > no bracket is needed when importing. If just put export, needs to put {} when importing
